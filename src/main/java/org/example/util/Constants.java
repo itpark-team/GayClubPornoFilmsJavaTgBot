@@ -7,4 +7,7 @@ public class Constants {
     public final static int FilmTagsMaxLength = 512;
 
     public final static int FilmUrlMaxLength = 2048;
+
+
+    public final static int MessageMaxLength = 4000;
 }

@@ -23,7 +23,7 @@ public class AddNewFimService {
 
         message.setText(DialogStringsStorage.InputFilmNameInAddFilmOk);
 
-        transmittedData.getDataStorage().add(SystemStringsStorage.DataStorageAddNewFilmName, filmName);
+        transmittedData.getDataStorage().addOrUpdate(SystemStringsStorage.DataStorageAddNewFilmName, filmName);
         transmittedData.setState(State.InputFilmUrlInAddFilm);
         return message;
     }
@@ -42,7 +42,7 @@ public class AddNewFimService {
 
         message.setText(DialogStringsStorage.InputFilmUrlInAddFilmOk);
 
-        transmittedData.getDataStorage().add(SystemStringsStorage.DataStorageAddNewFilmUrl, filmUrl);
+        transmittedData.getDataStorage().addOrUpdate(SystemStringsStorage.DataStorageAddNewFilmUrl, filmUrl);
         transmittedData.setState(State.InputFilmTagsInAddFilm);
         return message;
     }
@@ -62,7 +62,7 @@ public class AddNewFimService {
         Film film = new Film(transmittedData.getChatId(), filmName, filmTags, filmUrl);
         DbManager.getInstance().getTableFilms().addNew(film);
 
-        message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(filmName,filmUrl,filmTags));
+        message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(film));
 
         transmittedData.setState(State.CommandStart);
         return message;

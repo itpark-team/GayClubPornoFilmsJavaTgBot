@@ -1,45 +1,30 @@
 package org.example.service.menupoints;
 
-
 import org.example.model.DbManager;
 import org.example.model.entities.Film;
-import org.example.statemachine.State;
 import org.example.statemachine.TransmittedData;
 import org.example.util.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.List;
 
-public class MainMenuService {
+public class ShowFilmsService {
     private DbManager dbManager;
 
-    public MainMenuService() throws Exception {
+    public ShowFilmsService() throws Exception {
         dbManager = DbManager.getInstance();
     }
 
-    public SendMessage processCommandStart(String command, TransmittedData transmittedData) throws Exception {
+    public SendMessage processClickInShowFilms(String callBackData, TransmittedData transmittedData) throws Exception {
         SendMessage message = new SendMessage();
         message.setChatId(transmittedData.getChatId());
 
-        if (!command.equals(SystemStringsStorage.CommandStart)) {
-            message.setText(DialogStringsStorage.CommandStartError);
-            return message;
-        }
+        if (callBackData.equals(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData())) {
+            return SharedService.goToProcessClickInMenuMain(transmittedData);
+        } else if (callBackData.equals(ButtonsStorage.ShowMoreInShowFilms.getCallBackData())) {
 
-        return SharedService.goToProcessClickInMenuMain(transmittedData);
-    }
-
-    public SendMessage processClickInMenuMain(String callBackData, TransmittedData transmittedData) throws Exception {
-        SendMessage message = new SendMessage();
-        message.setChatId(transmittedData.getChatId());
-
-        if (callBackData.equals(ButtonsStorage.AddNewFilmInMenuMain.getCallBackData())) {
-            message.setText(DialogStringsStorage.InputFilmNameInAddFilmHello);
-            transmittedData.setState(State.InputFilmNameInAddFilm);
-            return message;
-        } else if (callBackData.equals(ButtonsStorage.ShowAllFilmsInMenuMain.getCallBackData())) {
-
-            List<Film> films = dbManager.getTableFilms().getAll();
+            long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageShowFilmLastId);
+            List<Film> films = dbManager.getTableFilms().getAllFromId(startId);
             boolean hasFit = true;
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -65,10 +50,6 @@ public class MainMenuService {
                 message.setReplyMarkup(InlineKeyboardsMarkupStorage.getShowMoreFilms());
             }
 
-            transmittedData.setState(State.ClickInShowFilms);
-            return message;
-        } else if (callBackData.equals(ButtonsStorage.FindFilmInMenuMain.getCallBackData())) {
-            message.setText("нажата кнопка: " + ButtonsStorage.FindFilmInMenuMain.getName());
             return message;
         }
 

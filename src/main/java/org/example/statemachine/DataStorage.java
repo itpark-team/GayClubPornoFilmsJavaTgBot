@@ -10,7 +10,7 @@ public class DataStorage {
         data = new HashMap<>();
     }
 
-    public void add(String key, Object value) {
+    public void addOrUpdate(String key, Object value) {
         data.put(key, value);
     }
 

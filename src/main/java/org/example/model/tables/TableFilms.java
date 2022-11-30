@@ -41,9 +41,36 @@ public class TableFilms {
         while (resultSet.next()) {
             long id = resultSet.getLong("id");
             long chatId = resultSet.getLong("chat_id");
-            String name  = resultSet.getString("name");
-            String tags  = resultSet.getString("tags");
-            String url  = resultSet.getString("url");
+            String name = resultSet.getString("name");
+            String tags = resultSet.getString("tags");
+            String url = resultSet.getString("url");
+
+            films.add(new Film(id, chatId, name, tags, url));
+        }
+
+        resultSet.close();
+
+        statement.close();
+
+        return films;
+    }
+
+    public List<Film> getAllFromId(long startId) throws SQLException {
+
+        List<Film> films = new ArrayList<>();
+
+        Statement statement = connection.createStatement();
+
+        String selectQuery = String.format("SELECT * FROM films WHERE id>=%d ORDER BY id ASC", startId);
+
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+
+        while (resultSet.next()) {
+            long id = resultSet.getLong("id");
+            long chatId = resultSet.getLong("chat_id");
+            String name = resultSet.getString("name");
+            String tags = resultSet.getString("tags");
+            String url = resultSet.getString("url");
 
             films.add(new Film(id, chatId, name, tags, url));
         }

@@ -39,4 +39,49 @@ public class InlineKeyboardsMarkupStorage {
 
         return replyKeyboardMarkup;
     }
+
+    public static InlineKeyboardMarkup getShowAllFilms() {
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+
+        List<InlineKeyboardButton> row;
+        InlineKeyboardButton button;
+
+        row = new ArrayList<>();
+        button = new InlineKeyboardButton();
+        button.setText(ButtonsStorage.BackToMenuMainInShowFilms.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData());
+        row.add(button);
+        keyboard.add(row);
+
+        InlineKeyboardMarkup replyKeyboardMarkup = new InlineKeyboardMarkup();
+        replyKeyboardMarkup.setKeyboard(keyboard);
+
+        return replyKeyboardMarkup;
+    }
+
+    public static InlineKeyboardMarkup getShowMoreFilms() {
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+
+        List<InlineKeyboardButton> row;
+        InlineKeyboardButton button;
+
+        row = new ArrayList<>();
+        button = new InlineKeyboardButton();
+        button.setText(ButtonsStorage.ShowMoreInShowFilms.getName());
+        button.setCallbackData(ButtonsStorage.ShowMoreInShowFilms.getCallBackData());
+        row.add(button);
+        keyboard.add(row);
+
+        row = new ArrayList<>();
+        button = new InlineKeyboardButton();
+        button.setText(ButtonsStorage.BackToMenuMainInShowFilms.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData());
+        row.add(button);
+        keyboard.add(row);
+
+        InlineKeyboardMarkup replyKeyboardMarkup = new InlineKeyboardMarkup();
+        replyKeyboardMarkup.setKeyboard(keyboard);
+
+        return replyKeyboardMarkup;
+    }
 }

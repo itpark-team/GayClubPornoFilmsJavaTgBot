@@ -1,5 +1,10 @@
 package org.example.util;
 
+import org.example.model.entities.Film;
+
+import java.net.FileNameMap;
+import java.util.List;
+
 public class DialogStringsStorage {
 
     public final static String CommandStartHello = "Выберите действие";
@@ -15,7 +20,12 @@ public class DialogStringsStorage {
 
     public final static String InputFilmTagsInAddFilmError = "Ошибка! Неверный ввод тегов. Длина строки тегов от 3 до 512 символов)";
 
-    public final static String createInputFilmTagsInAddFilmOk(String filmName, String filmUrl, String filmTags) {
-        return String.format("Фильм: %s\nСсылка: %s\nТеги: %s\nуспешно сохранён для возврата в главное меню введите /start", filmName, filmUrl, filmTags);
+    public static String createInputFilmTagsInAddFilmOk(Film film) {
+        return String.format("Фильм: %s\nСсылка: %s\nТеги: %s\nуспешно сохранён для возврата в главное меню введите /start", film.getName(), film.getUrl(), film.getTags());
+    }
+
+    public static String createShowFilmInMenuMain(Film film) {
+        return String.format("ИД: %d\nФильм: %s\nСсылка: %s\nТеги: %s\n", film.getId(), film.getName(), film.getUrl(), film.getTags());
     }
 }
+
