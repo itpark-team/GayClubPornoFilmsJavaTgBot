@@ -22,6 +22,7 @@ public class ButtonsStorage {
     public final static Button AddNewFilmInMenuMain = new Button("Добавить новый фильм", "AddNewFilmInMenuMain");
     public final static Button ShowAllFilmsInMenuMain = new Button("Показать все фильмы", "ShowAllFilmsInMenuMain");
     public final static Button FindFilmInMenuMain = new Button("Найти фильм по названию", "FindFilmInMenuMain");
+    public final static Button BackToMenuMainInAddFilm = new Button("В главное меню", "BackToMenuMainInAddFilm");
 
 
     public final static Button ShowMoreInShowFilms = new Button("Показать ещё", "ShowMoreInShowFilms");

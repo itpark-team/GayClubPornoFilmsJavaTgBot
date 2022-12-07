@@ -31,6 +31,7 @@ public class ServiceManager {
         methods.put(State.InputFilmNameInAddFilm, addNewFimService::processInputFilmNameInAddFilm);
         methods.put(State.InputFilmUrlInAddFilm, addNewFimService::processInputFilmUrlInAddFilm);
         methods.put(State.InputFilmTagsInAddFilm, addNewFimService::processInputFilmTagsInAddFilm);
+        methods.put(State.ClickBackToMenuMainInAddFilm, addNewFimService::processClickBackToMenuMainInAddFilm);
 
         methods.put(State.ClickInShowFilms, showFilmsService::processClickInShowFilms);
 

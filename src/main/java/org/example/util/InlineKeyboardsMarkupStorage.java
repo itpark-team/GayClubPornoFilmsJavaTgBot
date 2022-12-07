@@ -40,6 +40,25 @@ public class InlineKeyboardsMarkupStorage {
         return replyKeyboardMarkup;
     }
 
+    public static InlineKeyboardMarkup getBackToMenuMainInAddFilm() {
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+
+        List<InlineKeyboardButton> row;
+        InlineKeyboardButton button;
+
+        row = new ArrayList<>();
+        button = new InlineKeyboardButton();
+        button.setText(ButtonsStorage.BackToMenuMainInAddFilm.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMainInAddFilm.getCallBackData());
+        row.add(button);
+        keyboard.add(row);
+
+        InlineKeyboardMarkup replyKeyboardMarkup = new InlineKeyboardMarkup();
+        replyKeyboardMarkup.setKeyboard(keyboard);
+
+        return replyKeyboardMarkup;
+    }
+
     public static InlineKeyboardMarkup getShowAllFilms() {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 

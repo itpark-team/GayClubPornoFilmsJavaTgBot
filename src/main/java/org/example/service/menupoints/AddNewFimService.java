@@ -5,9 +5,7 @@ import org.example.model.entities.Film;
 import org.example.statemachine.State;
 import org.example.statemachine.TransmittedData;
 
-import org.example.util.Constants;
-import org.example.util.DialogStringsStorage;
-import org.example.util.SystemStringsStorage;
+import org.example.util.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 public class AddNewFimService {
@@ -63,8 +61,17 @@ public class AddNewFimService {
         DbManager.getInstance().getTableFilms().addNew(film);
 
         message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(film));
+        message.setReplyMarkup(InlineKeyboardsMarkupStorage.getBackToMenuMainInAddFilm());
 
-        transmittedData.setState(State.CommandStart);
+        transmittedData.setState(State.ClickBackToMenuMainInAddFilm);
         return message;
+    }
+
+    public SendMessage processClickBackToMenuMainInAddFilm(String callBackData, TransmittedData transmittedData) throws Exception {
+
+        if (callBackData.equals(ButtonsStorage.BackToMenuMainInAddFilm.getCallBackData())) {
+            return SharedService.goToProcessClickInMenuMain(transmittedData);
+        }
+        throw new Exception("Ошибка распознавания callBackData");
     }
 }

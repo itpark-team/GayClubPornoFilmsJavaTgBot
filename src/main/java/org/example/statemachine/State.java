@@ -6,5 +6,6 @@ public enum State {
     InputFilmNameInAddFilm,
     InputFilmUrlInAddFilm,
     InputFilmTagsInAddFilm,
+    ClickBackToMenuMainInAddFilm,
     ClickInShowFilms
 }

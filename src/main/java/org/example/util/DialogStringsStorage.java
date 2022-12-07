@@ -21,7 +21,7 @@ public class DialogStringsStorage {
     public final static String InputFilmTagsInAddFilmError = "Ошибка! Неверный ввод тегов. Длина строки тегов от 3 до 512 символов)";
 
     public static String createInputFilmTagsInAddFilmOk(Film film) {
-        return String.format("Фильм: %s\nСсылка: %s\nТеги: %s\nуспешно сохранён для возврата в главное меню введите /start", film.getName(), film.getUrl(), film.getTags());
+        return String.format("Фильм: %s\nСсылка: %s\nТеги: %s\nуспешно сохранён", film.getName(), film.getUrl(), film.getTags());
     }
 
     public static String createShowFilmInMenuMain(Film film) {
