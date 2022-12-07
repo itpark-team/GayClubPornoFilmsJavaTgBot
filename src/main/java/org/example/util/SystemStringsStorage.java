@@ -11,6 +11,6 @@ public class SystemStringsStorage {
     public final static String DataStorageAddNewFilmName = "DataStorageAddNewFilmName";
     public final static String DataStorageAddNewFilmUrl = "DataStorageAddNewFilmUrl";
 
-    public final static String DataStorageShowFilmLastId = "DataStorageShowFilmLastId";
+    public final static String DataStorageFilmLastId = "DataStorageFilmLastId";
     public final static String DataStorageSearchValue = "DataStorageSearchValue";
 }

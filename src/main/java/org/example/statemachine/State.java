@@ -10,8 +10,8 @@ public enum State {
     InputFilmTagsInAddFilm,
     ClickInAddFilm,
 
-    ClickMoreOrBackInShowFilms,
+    ClickInShowFilms,
 
-    InputSearchValueInFindFilm,
-    ClickMoreOrBackToMenuMainInFindFilm,
+    InputSearchValueInFindFilms,
+    ClickInFindFilm,
 }

@@ -36,10 +36,10 @@ public class ServiceManager {
         methods.put(State.InputFilmTagsInAddFilm, addNewFimService::processInputFilmTagsInAddFilm);
         methods.put(State.ClickInAddFilm, addNewFimService::processClickBackToMenuMainInAddFilm);
 
-        methods.put(State.ClickMoreOrBackInShowFilms, showFilmsService::processClickInShowFilms);
+        methods.put(State.ClickInShowFilms, showFilmsService::processClickInShowFilms);
 
-        methods.put(State.InputSearchValueInFindFilm, findFilmsService::processInputSearchValueInFindFilm);
-        methods.put(State.ClickMoreOrBackToMenuMainInFindFilm, findFilmsService::processClickMoreOrBackToMenuMainInFindFilm);
+        methods.put(State.InputSearchValueInFindFilms, findFilmsService::processInputSearchValueInFindFilms);
+        methods.put(State.ClickInFindFilm, findFilmsService::processClickInFindFilm);
 
     }
 

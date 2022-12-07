@@ -34,19 +34,19 @@ public class MainMenuService {
         message.setChatId(transmittedData.getChatId());
 
         if (callBackData.equals(ButtonsStorage.AddNewFilmInMenuMain.getCallBackData())) {
-            message.setText(DialogStringsStorage.InputFilmNameInAddFilmHello);
+            message.setText(DialogStringsStorage.InputFilmNameInAddFilm);
             transmittedData.setState(State.InputFilmNameInAddFilm);
             return message;
         } else if (callBackData.equals(ButtonsStorage.ShowAllFilmsInMenuMain.getCallBackData())) {
 
             List<Film> films = dbManager.getTableFilms().getAll();
 
-            transmittedData.setState(State.ClickMoreOrBackInShowFilms);
-            return ServiceUtils.showFilms(message, films, transmittedData);
+            transmittedData.setState(State.ClickInShowFilms);
+            return SharedService.showFilms(message, films, transmittedData);
         } else if (callBackData.equals(ButtonsStorage.FindFilmsInMenuMain.getCallBackData())) {
-            message.setText(DialogStringsStorage.InputSearchValueInFindFilm);
+            message.setText(DialogStringsStorage.InputSearchValueInFindFilms);
 
-            transmittedData.setState(State.InputSearchValueInFindFilm);
+            transmittedData.setState(State.InputSearchValueInFindFilms);
             return message;
         }
 

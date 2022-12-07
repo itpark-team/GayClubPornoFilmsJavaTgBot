@@ -69,7 +69,7 @@ public class AddNewFimService {
 
     public SendMessage processClickBackToMenuMainInAddFilm(String callBackData, TransmittedData transmittedData) throws Exception {
 
-        if (callBackData.equals(ButtonsStorage.BackToMenuMainInAddFilm.getCallBackData())) {
+        if (callBackData.equals(ButtonsStorage.BackToMenuMain.getCallBackData())) {
             return SharedService.goToProcessClickInMenuMain(transmittedData);
         }
         throw new Exception("Ошибка распознавания callBackData");

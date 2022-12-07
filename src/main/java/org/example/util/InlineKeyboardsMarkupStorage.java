@@ -48,8 +48,8 @@ public class InlineKeyboardsMarkupStorage {
 
         row = new ArrayList<>();
         button = new InlineKeyboardButton();
-        button.setText(ButtonsStorage.BackToMenuMainInAddFilm.getName());
-        button.setCallbackData(ButtonsStorage.BackToMenuMainInAddFilm.getCallBackData());
+        button.setText(ButtonsStorage.BackToMenuMain.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMain.getCallBackData());
         row.add(button);
         keyboard.add(row);
 
@@ -67,8 +67,8 @@ public class InlineKeyboardsMarkupStorage {
 
         row = new ArrayList<>();
         button = new InlineKeyboardButton();
-        button.setText(ButtonsStorage.BackToMenuMainInShowFilms.getName());
-        button.setCallbackData(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData());
+        button.setText(ButtonsStorage.BackToMenuMain.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMain.getCallBackData());
         row.add(button);
         keyboard.add(row);
 
@@ -86,15 +86,15 @@ public class InlineKeyboardsMarkupStorage {
 
         row = new ArrayList<>();
         button = new InlineKeyboardButton();
-        button.setText(ButtonsStorage.ShowMoreInShowFilms.getName());
-        button.setCallbackData(ButtonsStorage.ShowMoreInShowFilms.getCallBackData());
+        button.setText(ButtonsStorage.ShowMore.getName());
+        button.setCallbackData(ButtonsStorage.ShowMore.getCallBackData());
         row.add(button);
         keyboard.add(row);
 
         row = new ArrayList<>();
         button = new InlineKeyboardButton();
-        button.setText(ButtonsStorage.BackToMenuMainInShowFilms.getName());
-        button.setCallbackData(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData());
+        button.setText(ButtonsStorage.BackToMenuMain.getName());
+        button.setCallbackData(ButtonsStorage.BackToMenuMain.getCallBackData());
         row.add(button);
         keyboard.add(row);
 

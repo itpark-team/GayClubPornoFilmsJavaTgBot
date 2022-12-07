@@ -19,14 +19,14 @@ public class ShowFilmsService {
         SendMessage message = new SendMessage();
         message.setChatId(transmittedData.getChatId());
 
-        if (callBackData.equals(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData())) {
+        if (callBackData.equals(ButtonsStorage.BackToMenuMain.getCallBackData())) {
             return SharedService.goToProcessClickInMenuMain(transmittedData);
-        } else if (callBackData.equals(ButtonsStorage.ShowMoreInShowFilms.getCallBackData())) {
+        } else if (callBackData.equals(ButtonsStorage.ShowMore.getCallBackData())) {
 
-            long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageShowFilmLastId);
+            long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageFilmLastId);
             List<Film> films = dbManager.getTableFilms().getAllFromId(startId);
 
-            return ServiceUtils.showFilms(message, films, transmittedData);
+            return SharedService.showFilms(message, films, transmittedData);
         }
 
         throw new Exception("Ошибка распознавания callBackData");

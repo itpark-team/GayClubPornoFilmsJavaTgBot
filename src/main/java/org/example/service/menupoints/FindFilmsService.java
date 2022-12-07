@@ -19,38 +19,38 @@ public class FindFilmsService {
         dbManager = DbManager.getInstance();
     }
 
-    public SendMessage processInputSearchValueInFindFilm(String searchValue, TransmittedData transmittedData) throws Exception {
+    public SendMessage processInputSearchValueInFindFilms(String searchValue, TransmittedData transmittedData) throws Exception {
         SendMessage message = new SendMessage();
         message.setChatId(transmittedData.getChatId());
 
         if (searchValue.length() < Constants.FilmSearchValueMinLength || searchValue.length() > Constants.FilmSearchValueMaxLength) {
 
-            message.setText(DialogStringsStorage.InputSearchValueInFindFilmError);
+            message.setText(DialogStringsStorage.InputSearchValueInFindFilmsError);
             return message;
         }
 
         List<Film> films = dbManager.getTableFilms().getAllByIdOrNameOrTag(searchValue);
 
         transmittedData.getDataStorage().addOrUpdate(SystemStringsStorage.DataStorageSearchValue, searchValue);
-        transmittedData.setState(State.ClickMoreOrBackToMenuMainInFindFilm);
-        return ServiceUtils.showFilms(message, films, transmittedData);
+        transmittedData.setState(State.ClickInFindFilm);
+        return SharedService.showFilms(message, films, transmittedData);
     }
 
-    public SendMessage processClickMoreOrBackToMenuMainInFindFilm(String callBackData, TransmittedData transmittedData) throws Exception {
+    public SendMessage processClickInFindFilm(String callBackData, TransmittedData transmittedData) throws Exception {
         SendMessage message = new SendMessage();
         message.setChatId(transmittedData.getChatId());
 
-        if (callBackData.equals(ButtonsStorage.BackToMenuMainInShowFilms.getCallBackData())) {
+        if (callBackData.equals(ButtonsStorage.BackToMenuMain.getCallBackData())) {
             return SharedService.goToProcessClickInMenuMain(transmittedData);
-        } else if (callBackData.equals(ButtonsStorage.ShowMoreInShowFilms.getCallBackData())) {
+        } else if (callBackData.equals(ButtonsStorage.ShowMore.getCallBackData())) {
 
-            long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageShowFilmLastId);
+            long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageFilmLastId);
 
             String searchValue = (String) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageSearchValue);
 
             List<Film> films = dbManager.getTableFilms().getAllByIdOrNameOrTagFromId(searchValue, startId);
 
-            return ServiceUtils.showFilms(message, films, transmittedData);
+            return SharedService.showFilms(message, films, transmittedData);
         }
 
         throw new Exception("Ошибка распознавания callBackData");
