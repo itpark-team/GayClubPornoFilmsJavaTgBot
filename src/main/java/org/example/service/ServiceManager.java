@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.service.menupoints.AddNewFimService;
+import org.example.service.menupoints.FindFilmsService;
 import org.example.service.menupoints.MainMenuService;
 
 import org.example.service.menupoints.ShowFilmsService;
@@ -17,6 +18,7 @@ public class ServiceManager {
     private final MainMenuService mainMenuService;
     private final AddNewFimService addNewFimService;
     private final ShowFilmsService showFilmsService;
+    private final FindFilmsService findFilmsService;
 
     public ServiceManager() throws Exception {
         methods = new HashMap<>();
@@ -24,6 +26,7 @@ public class ServiceManager {
         mainMenuService = new MainMenuService();
         addNewFimService = new AddNewFimService();
         showFilmsService = new ShowFilmsService();
+        findFilmsService = new FindFilmsService();
 
         methods.put(State.CommandStart, mainMenuService::processCommandStart);
         methods.put(State.ClickInMenuMain, mainMenuService::processClickInMenuMain);
@@ -31,9 +34,12 @@ public class ServiceManager {
         methods.put(State.InputFilmNameInAddFilm, addNewFimService::processInputFilmNameInAddFilm);
         methods.put(State.InputFilmUrlInAddFilm, addNewFimService::processInputFilmUrlInAddFilm);
         methods.put(State.InputFilmTagsInAddFilm, addNewFimService::processInputFilmTagsInAddFilm);
-        methods.put(State.ClickBackToMenuMainInAddFilm, addNewFimService::processClickBackToMenuMainInAddFilm);
+        methods.put(State.ClickInAddFilm, addNewFimService::processClickBackToMenuMainInAddFilm);
 
-        methods.put(State.ClickInShowFilms, showFilmsService::processClickInShowFilms);
+        methods.put(State.ClickMoreOrBackInShowFilms, showFilmsService::processClickInShowFilms);
+
+        methods.put(State.InputSearchValueInFindFilm, findFilmsService::processInputSearchValueInFindFilm);
+        methods.put(State.ClickMoreOrBackToMenuMainInFindFilm, findFilmsService::processClickMoreOrBackToMenuMainInFindFilm);
 
     }
 

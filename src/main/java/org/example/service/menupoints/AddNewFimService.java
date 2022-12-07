@@ -63,7 +63,7 @@ public class AddNewFimService {
         message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(film));
         message.setReplyMarkup(InlineKeyboardsMarkupStorage.getBackToMenuMainInAddFilm());
 
-        transmittedData.setState(State.ClickBackToMenuMainInAddFilm);
+        transmittedData.setState(State.ClickInAddFilm);
         return message;
     }
 

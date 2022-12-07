@@ -24,8 +24,14 @@ public class DialogStringsStorage {
         return String.format("Фильм: %s\nСсылка: %s\nТеги: %s\nуспешно сохранён", film.getName(), film.getUrl(), film.getTags());
     }
 
-    public static String createShowFilmInMenuMain(Film film) {
+    public static String createShowFilm(Film film) {
         return String.format("ИД: %d\nФильм: %s\nСсылка: %s\nТеги: %s\n", film.getId(), film.getName(), film.getUrl(), film.getTags());
     }
+
+    public final static String InputSearchValueInFindFilm = "Введите ИД или название или тег фильма для поиска";
+
+    public final static String InputSearchValueInFindFilmError = "Ошибка! Нарушен лимит символов поискового запроса. Введите значение от 1 до 128 символов";
+
+    public final static String NoFilmsInFindFilm = "Фильмы не обнаружены";
 }
 

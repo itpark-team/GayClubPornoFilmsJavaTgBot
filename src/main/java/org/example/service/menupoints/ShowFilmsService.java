@@ -25,32 +25,8 @@ public class ShowFilmsService {
 
             long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageShowFilmLastId);
             List<Film> films = dbManager.getTableFilms().getAllFromId(startId);
-            boolean hasFit = true;
 
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (Film film : films) {
-                int totalLength = stringBuilder.length();
-                int newFilmLength = DialogStringsStorage.createShowFilmInMenuMain(film).length();
-
-                if (totalLength + newFilmLength > Constants.MessageMaxLength) {
-                    hasFit = false;
-                    transmittedData.getDataStorage().addOrUpdate(SystemStringsStorage.DataStorageShowFilmLastId, film.getId());
-                    break;
-                }
-
-                stringBuilder.append(DialogStringsStorage.createShowFilmInMenuMain(film));
-            }
-
-            message.setText(stringBuilder.toString());
-
-            if (hasFit) {
-                message.setReplyMarkup(InlineKeyboardsMarkupStorage.getShowAllFilms());
-            } else {
-                message.setReplyMarkup(InlineKeyboardsMarkupStorage.getShowMoreFilms());
-            }
-
-            return message;
+            return ServiceUtils.showFilms(message, films, transmittedData);
         }
 
         throw new Exception("Ошибка распознавания callBackData");

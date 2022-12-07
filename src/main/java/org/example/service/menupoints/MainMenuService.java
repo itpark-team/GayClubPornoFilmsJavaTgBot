@@ -40,35 +40,13 @@ public class MainMenuService {
         } else if (callBackData.equals(ButtonsStorage.ShowAllFilmsInMenuMain.getCallBackData())) {
 
             List<Film> films = dbManager.getTableFilms().getAll();
-            boolean hasFit = true;
 
-            StringBuilder stringBuilder = new StringBuilder();
+            transmittedData.setState(State.ClickMoreOrBackInShowFilms);
+            return ServiceUtils.showFilms(message, films, transmittedData);
+        } else if (callBackData.equals(ButtonsStorage.FindFilmsInMenuMain.getCallBackData())) {
+            message.setText(DialogStringsStorage.InputSearchValueInFindFilm);
 
-            for (Film film : films) {
-                int totalLength = stringBuilder.length();
-                int newFilmLength = DialogStringsStorage.createShowFilmInMenuMain(film).length();
-
-                if (totalLength + newFilmLength > Constants.MessageMaxLength) {
-                    hasFit = false;
-                    transmittedData.getDataStorage().addOrUpdate(SystemStringsStorage.DataStorageShowFilmLastId, film.getId());
-                    break;
-                }
-
-                stringBuilder.append(DialogStringsStorage.createShowFilmInMenuMain(film));
-            }
-
-            message.setText(stringBuilder.toString());
-
-            if (hasFit) {
-                message.setReplyMarkup(InlineKeyboardsMarkupStorage.getShowAllFilms());
-            } else {
-                message.setReplyMarkup(InlineKeyboardsMarkupStorage.getShowMoreFilms());
-            }
-
-            transmittedData.setState(State.ClickInShowFilms);
-            return message;
-        } else if (callBackData.equals(ButtonsStorage.FindFilmInMenuMain.getCallBackData())) {
-            message.setText("нажата кнопка: " + ButtonsStorage.FindFilmInMenuMain.getName());
+            transmittedData.setState(State.InputSearchValueInFindFilm);
             return message;
         }
 

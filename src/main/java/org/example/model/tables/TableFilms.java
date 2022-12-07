@@ -1,5 +1,6 @@
 package org.example.model.tables;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.model.entities.Film;
 
 import java.math.BigDecimal;
@@ -81,4 +82,66 @@ public class TableFilms {
 
         return films;
     }
+
+
+    public List<Film> getAllByIdOrNameOrTag(String searchValue) throws SQLException {
+
+        List<Film> films = new ArrayList<>();
+
+        Statement statement = connection.createStatement();
+
+        String selectQuery = "";
+
+        if (StringUtils.isNumeric(searchValue)) {
+            selectQuery = String.format("SELECT * FROM films WHERE id=%s OR name LIKE '%%%s%%' OR tags LIKE '%%%s%%' ORDER BY id ASC", searchValue, searchValue, searchValue);
+        } else {
+            selectQuery = String.format("SELECT * FROM films WHERE name LIKE '%%%s%%' OR tags LIKE '%%%s%%' ORDER BY id ASC", searchValue, searchValue);
+        }
+
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+
+        while (resultSet.next()) {
+            long id = resultSet.getLong("id");
+            long chatId = resultSet.getLong("chat_id");
+            String name = resultSet.getString("name");
+            String tags = resultSet.getString("tags");
+            String url = resultSet.getString("url");
+
+            films.add(new Film(id, chatId, name, tags, url));
+        }
+
+        resultSet.close();
+
+        statement.close();
+
+        return films;
+    }
+
+    public List<Film> getAllByIdOrNameOrTagFromId(String searchValue, long startId) throws SQLException {
+
+        List<Film> films = new ArrayList<>();
+
+        Statement statement = connection.createStatement();
+
+        String selectQuery = String.format("SELECT * FROM films WHERE (name LIKE '%%%s%%' OR tags LIKE '%%%s%%') AND id>=%d ORDER BY id ASC", searchValue, searchValue, startId);
+
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+
+        while (resultSet.next()) {
+            long id = resultSet.getLong("id");
+            long chatId = resultSet.getLong("chat_id");
+            String name = resultSet.getString("name");
+            String tags = resultSet.getString("tags");
+            String url = resultSet.getString("url");
+
+            films.add(new Film(id, chatId, name, tags, url));
+        }
+
+        resultSet.close();
+
+        statement.close();
+
+        return films;
+    }
+
 }

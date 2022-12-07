@@ -8,6 +8,8 @@ public class Constants {
 
     public final static int FilmUrlMaxLength = 2048;
 
+    public final static int FilmSearchValueMinLength = 1;
+    public final static int FilmSearchValueMaxLength = 128;
 
     public final static int MessageMaxLength = 4000;
 }
