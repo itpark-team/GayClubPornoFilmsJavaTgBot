@@ -9,6 +9,13 @@ import org.example.util.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 public class AddNewFimService {
+
+    private DbManager dbManager;
+
+    public AddNewFimService(DbManager dbManager) {
+        this.dbManager = dbManager;
+    }
+
     public SendMessage processInputFilmNameInAddFilm(String filmName, TransmittedData transmittedData) throws Exception {
         SendMessage message = new SendMessage();
         message.setChatId(transmittedData.getChatId());
@@ -58,7 +65,7 @@ public class AddNewFimService {
         String filmUrl = (String) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageAddNewFilmUrl);
 
         Film film = new Film(transmittedData.getChatId(), filmName, filmTags, filmUrl);
-        DbManager.getInstance().getTableFilms().addNew(film);
+        dbManager.getTableFilms().addNew(film);
 
         message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(film));
         message.setReplyMarkup(InlineKeyboardsMarkupStorage.getBackToMenuMainInAddFilm());

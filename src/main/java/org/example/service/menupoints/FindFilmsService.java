@@ -15,8 +15,8 @@ import java.util.List;
 public class FindFilmsService {
     private DbManager dbManager;
 
-    public FindFilmsService() throws Exception {
-        dbManager = DbManager.getInstance();
+    public FindFilmsService(DbManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     public SendMessage processInputSearchValueInFindFilms(String searchValue, TransmittedData transmittedData) throws Exception {

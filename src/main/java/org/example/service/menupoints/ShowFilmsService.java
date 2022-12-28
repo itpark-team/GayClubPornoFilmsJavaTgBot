@@ -11,8 +11,8 @@ import java.util.List;
 public class ShowFilmsService {
     private DbManager dbManager;
 
-    public ShowFilmsService() throws Exception {
-        dbManager = DbManager.getInstance();
+    public ShowFilmsService(DbManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     public SendMessage processClickInShowFilms(String callBackData, TransmittedData transmittedData) throws Exception {
@@ -24,7 +24,7 @@ public class ShowFilmsService {
         } else if (callBackData.equals(ButtonsStorage.ShowMore.getCallBackData())) {
 
             long startId = (long) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageFilmLastId);
-            List<Film> films = dbManager.getTableFilms().getAllFromId(startId);
+            List<Film> films = dbManager.getTableFilms().getAllFromStartId(startId);
 
             return SharedService.showFilms(message, films, transmittedData);
         }

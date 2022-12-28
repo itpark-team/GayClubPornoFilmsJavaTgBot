@@ -13,8 +13,8 @@ import java.util.List;
 public class MainMenuService {
     private DbManager dbManager;
 
-    public MainMenuService() throws Exception {
-        dbManager = DbManager.getInstance();
+    public MainMenuService(DbManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     public SendMessage processCommandStart(String command, TransmittedData transmittedData) throws Exception {

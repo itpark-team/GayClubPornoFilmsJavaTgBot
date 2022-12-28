@@ -1,5 +1,9 @@
 package org.example.service;
 
+import org.example.model.DbManager;
+import org.example.model.connection.DbConnection;
+import org.example.model.tables.TableFilms;
+import org.example.model.tables.TableFilmsImpl;
 import org.example.service.menupoints.AddNewFimService;
 import org.example.service.menupoints.FindFilmsService;
 import org.example.service.menupoints.MainMenuService;
@@ -7,6 +11,7 @@ import org.example.service.menupoints.MainMenuService;
 import org.example.service.menupoints.ShowFilmsService;
 import org.example.statemachine.State;
 import org.example.statemachine.TransmittedData;
+import org.example.util.SystemStringsStorage;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.HashMap;
@@ -23,10 +28,19 @@ public class ServiceManager {
     public ServiceManager() throws Exception {
         methods = new HashMap<>();
 
-        mainMenuService = new MainMenuService();
-        addNewFimService = new AddNewFimService();
-        showFilmsService = new ShowFilmsService();
-        findFilmsService = new FindFilmsService();
+        DbConnection dbConnection = new DbConnection(
+                SystemStringsStorage.DbUrl,
+                SystemStringsStorage.DbUser,
+                SystemStringsStorage.DbPassword
+        );
+
+        TableFilms tableFilms = new TableFilmsImpl(dbConnection.getConnection());
+        DbManager dbManager = new DbManager(tableFilms);
+
+        mainMenuService = new MainMenuService(dbManager);
+        addNewFimService = new AddNewFimService(dbManager);
+        showFilmsService = new ShowFilmsService(dbManager);
+        findFilmsService = new FindFilmsService(dbManager);
 
         methods.put(State.CommandStart, mainMenuService::processCommandStart);
         methods.put(State.ClickInMenuMain, mainMenuService::processClickInMenuMain);

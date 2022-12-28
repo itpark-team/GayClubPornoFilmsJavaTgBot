@@ -6,23 +6,17 @@ import org.example.statemachine.TransmittedData;
 import org.example.util.DialogStringsStorage;
 import org.example.util.InlineKeyboardsMarkupStorage;
 import org.example.util.SystemStringsStorage;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MainMenuServiceTest {
     @Test
     public void processCommandStart_WrongCommandStart_ReturnCommandStartError() throws Exception {
         //подготовка
-        MainMenuService mainMenuService = new MainMenuService();
+        MainMenuService mainMenuService = new MainMenuService(null);
         String command = "WrongCommand";
         TransmittedData transmittedData = new TransmittedData(0);
 
@@ -39,7 +33,7 @@ class MainMenuServiceTest {
     @Test
     public void processCommandStart_CommandStart_PrepareAndReturnMainMenu() throws Exception {
         //подготовка
-        MainMenuService mainMenuService = new MainMenuService();
+        MainMenuService mainMenuService = new MainMenuService(null);
         String command = SystemStringsStorage.CommandStart;
         TransmittedData transmittedData = new TransmittedData(0);
 
