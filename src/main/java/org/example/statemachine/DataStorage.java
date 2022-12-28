@@ -25,4 +25,8 @@ public class DataStorage {
     public void clear() {
         data.clear();
     }
+
+    public int size() {
+        return data.size();
+    }
 }
