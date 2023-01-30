@@ -2,8 +2,10 @@ package org.example.service;
 
 import org.example.model.DbManager;
 import org.example.model.connection.DbConnection;
+import org.example.model.connection.HibernateSession;
 import org.example.model.tables.TableFilms;
-import org.example.model.tables.TableFilmsImpl;
+import org.example.model.tables.TableFilmsHiberImpl;
+import org.example.model.tables.TableFilmsJdbcImpl;
 import org.example.service.menupoints.AddNewFimService;
 import org.example.service.menupoints.FindFilmsService;
 import org.example.service.menupoints.MainMenuService;
@@ -12,6 +14,7 @@ import org.example.service.menupoints.ShowFilmsService;
 import org.example.statemachine.State;
 import org.example.statemachine.TransmittedData;
 import org.example.util.SystemStringsStorage;
+import org.hibernate.SessionFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.HashMap;
@@ -28,13 +31,18 @@ public class ServiceManager {
     public ServiceManager() throws Exception {
         methods = new HashMap<>();
 
-        DbConnection dbConnection = new DbConnection(
-                SystemStringsStorage.DbUrl,
-                SystemStringsStorage.DbUser,
-                SystemStringsStorage.DbPassword
-        );
+//        DbConnection dbConnection = new DbConnection(
+//                SystemStringsStorage.DbUrl,
+//                SystemStringsStorage.DbUser,
+//                SystemStringsStorage.DbPassword
+//        );
+//
+//        TableFilms tableFilms = new TableFilmsJdbcImpl(dbConnection.getConnection());
 
-        TableFilms tableFilms = new TableFilmsImpl(dbConnection.getConnection());
+        SessionFactory sessionFactory = new HibernateSession().getSessionFactory();
+
+        TableFilms tableFilms = new TableFilmsHiberImpl(sessionFactory);
+
         DbManager dbManager = new DbManager(tableFilms);
 
         mainMenuService = new MainMenuService(dbManager);

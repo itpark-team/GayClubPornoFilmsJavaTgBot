@@ -12,14 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TableFilmsImpl implements TableFilms {
+public class TableFilmsJdbcImpl implements TableFilms {
     private final Connection connection;
 
-    public TableFilmsImpl(Connection connection) {
+    public TableFilmsJdbcImpl(Connection connection) {
         this.connection = connection;
     }
 
     public void addNew(Film newFilm) throws Exception {
+
         Statement statement = connection.createStatement();
 
         String insertQuery = String.format("INSERT INTO films (chat_id, name, tags, url) VALUES (%d,'%s','%s', '%s')", newFilm.getChatId(), newFilm.getName(), newFilm.getTags(), newFilm.getUrl());

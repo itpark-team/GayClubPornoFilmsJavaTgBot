@@ -64,7 +64,14 @@ public class AddNewFimService {
         String filmName = (String) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageAddNewFilmName);
         String filmUrl = (String) transmittedData.getDataStorage().get(SystemStringsStorage.DataStorageAddNewFilmUrl);
 
-        Film film = new Film(transmittedData.getChatId(), filmName, filmTags, filmUrl);
+        Film film = Film.builder()
+                .chatId(transmittedData.getChatId())
+                .name(filmName)
+                .url(filmUrl)
+                .tags(filmTags)
+                .build();
+
+
         dbManager.getTableFilms().addNew(film);
 
         message.setText(DialogStringsStorage.createInputFilmTagsInAddFilmOk(film));

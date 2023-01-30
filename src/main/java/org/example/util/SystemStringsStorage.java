@@ -14,7 +14,8 @@ public class SystemStringsStorage {
     public final static String DataStorageFilmLastId = "DataStorageFilmLastId";
     public final static String DataStorageSearchValue = "DataStorageSearchValue";
 
-    public final static String DbUrl = "jdbc:postgresql://194.67.105.79:5432/gayclubpornofilmsdb";
+    //public final static String DbUrl = "jdbc:postgresql://194.67.105.79:5432/gayclubpornofilmsdb";
+    public final static String DbUrl = "jdbc:postgresql://db:5432/gayclubpornofilmsdb";
     public final static String DbUser = "gayclubpornofilmsuser";
     public final static String DbPassword = "12345";
 

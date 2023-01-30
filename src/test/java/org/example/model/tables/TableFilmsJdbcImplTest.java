@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class TableFilmsImplTest {
+class TableFilmsJdbcImplTest {
     @Test
     public void getAll_Return3Films() throws Exception {
         //подготовка
@@ -19,7 +19,7 @@ class TableFilmsImplTest {
                 SystemStringsStorage.TestDbPassword
         );
 
-        TableFilms tableFilms = new TableFilmsImpl(dbConnection.getConnection());
+        TableFilms tableFilms = new TableFilmsJdbcImpl(dbConnection.getConnection());
 
         //тестирование
         List<Film> films = tableFilms.getAll();

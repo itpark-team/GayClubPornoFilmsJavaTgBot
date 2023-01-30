@@ -1,45 +1,32 @@
 package org.example.model.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "films")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Film {
-    private final long id;
-    private final long chatId;
-    private final String name;
-    private final String tags;
-    private final String url;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Film(long id, long chatId, String name, String tags, String url) {
-        this.id = id;
-        this.chatId = chatId;
-        this.name = name;
-        this.tags = tags;
-        this.url = url;
-    }
+    @Column(name = "chat_id")
+    private long chatId;
 
-    public Film(long chatId, String name, String tags, String url) {
-        this.id = 0;
-        this.chatId = chatId;
-        this.name = name;
-        this.tags = tags;
-        this.url = url;
-    }
+    @Column(name = "name")
+    private String name;
 
-    public long getId() {
-        return id;
-    }
+    @Column(name = "tags")
+    private String tags;
 
-    public long getChatId() {
-        return chatId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
-    public String getUrl() {
-        return url;
-    }
+    @Column(name = "url")
+    private String url;
 }
